@@ -1,0 +1,35 @@
+{
+  "lastToolCall": "2026-08-03T17:34:40.577Z",
+  "lastToolName": "bash",
+  "lastOutputTruncated": "==> Generating the 3.0 gtk-Dark.css... ==> Generating the 4.0 gtk-Dark.css... ==> Generating gnome-shell-Dark.css... ==> Generating the cinnamon-Dark.css... ",
+  "toolCount": 60,
+  "recentTools": [
+    {
+      "name": "bash",
+      "time": "2026-08-03T17:34:40.577Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T16:43:29.394Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T16:42:31.451Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T16:41:42.816Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T16:39:48.484Z"
+    }
+  ],
+  "todoProgress": {
+    "lastChange": "",
+    "completed": 0,
+    "remaining": 0,
+    "pending": 0,
+    "inProgress": 0
+  }
+}

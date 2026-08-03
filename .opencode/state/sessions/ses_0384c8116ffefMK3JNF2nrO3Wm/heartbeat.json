@@ -1,0 +1,19 @@
+{
+  "lastToolCall": "2026-08-03T12:57:42.424Z",
+  "lastToolName": "bash",
+  "lastOutputTruncated": "total 52 drwxr-xr-x 13 tlh users 4096 Aug  3 08:55 . drwxr-xr-x  5 tlh users 4096 Aug  3 08:56 .. drwxr-xr-x  2 tlh users 4096 Aug  3 08:55 common drwxr-xr-x  2 tlh users 4096 Aug  3 08:55 extensions-",
+  "toolCount": 1,
+  "recentTools": [
+    {
+      "name": "bash",
+      "time": "2026-08-03T12:57:42.424Z"
+    }
+  ],
+  "todoProgress": {
+    "lastChange": "",
+    "completed": 0,
+    "remaining": 0,
+    "pending": 0,
+    "inProgress": 0
+  }
+}

@@ -1,0 +1,349 @@
+// Solid color image
+@function _solid($c) {
+  @return linear-gradient(to bottom, $c, $c);
+}
+
+// Skeuomorphic button gradient helpers
+$skeu_start: darken(#8b888f, 10%);
+$skeu_mid:   darken(#98959c, 10%);
+$skeu_end:   darken(#555566, 10%);
+
+@function skeu-gradient() {
+  @return repeating-linear-gradient(23deg, $skeu_start, $skeu_mid, $skeu_end);
+}
+
+@function skeu-gradient-hover() {
+  @return repeating-linear-gradient(23deg, $skeu_end, $skeu_mid, $skeu_start);
+}
+
+@function skeu-gradient-active() {
+  @return repeating-linear-gradient(23deg, lighten(#8b888f, 15%), lighten(#98959c, 15%), lighten(#555566, 15%));
+}
+
+@function skeu-gradient-backdrop() {
+  @return repeating-linear-gradient(23deg, darken($skeu_start, 15%), darken($skeu_mid, 15%), darken($skeu_end, 15%));
+}
+
+// Entries
+@mixin entry($t) {
+  @if $t==normal {
+    color: $text_color;
+    background-color: $entry_bg;
+    box-shadow: inset 0 0 0 2px transparent;
+  }
+  @if $t==hover {
+    color: $text_color;
+    background-color: $entry_bg;
+    box-shadow: inset 0 0 0 1px gtkalpha($borders_color, 0.05), inset 0 0 0 2px transparent;
+    transition-duration: $shorter_duration * 2;
+  }
+  @if $t==focus {
+    color: $text_color;
+    background-color: $entry_bg;
+    box-shadow: inset 0 0 0 2px $entry_highlight;
+    transition-duration: $longer_duration * 2;
+  }
+  @if $t==insensitive {
+    color: $disabled_fg_color;
+    background-color: $entry_disabled_bg;
+  }
+  @if $t==header-normal {
+    color: $header_fg;
+    border-radius: $circular_radius;
+    background-color: transparent;
+    background-image: $header_button_image;
+    box-shadow: 0 3px 8px rgba(black, 0.15), inset 1px 1px 1px -1px $button_highlight, inset -1px -1px 1px -1px $button_highlight, inset 0 0 0 2px transparent;
+    border: none;
+    image, image:hover { color: inherit; }
+  }
+  @if $t==header-hover {
+    color: $header_fg;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(white, 0.05), rgba(white, 0.03));
+    box-shadow: 0 5px 12px rgba(black, 0.2), inset 1px 1px 1px -1px $button_highlight, inset -1px -1px 1px -1px $button_highlight, inset 0 0 0 2px transparent;
+    transition-duration: $shorter_duration * 2;
+  }
+  @if $t==header-focus {
+    color: $header_fg;
+    background-image: none;
+    background-color: $entry_bg;
+    box-shadow: 0 5px 12px rgba(black, 0.2), inset 0 0 0 2px $entry_highlight;
+  }
+  @if $t==header-insensitive {
+    color: gtkalpha($header_fg, 0.35);
+    background-color: gtkalpha($entry_bg, 0.02);
+    background-image: none;
+    box-shadow: none;
+  }
+  @else if $t==osd {
+    color: $osd_fg_color;
+    border-color: $osd_entry_border;
+    background-color: $osd_entry_bg;
+    image, image:hover { color: inherit; }
+  }
+  @else if $t==osd-focus {
+    color: $selected_fg_color;
+    background-color: $selected_bg_color;
+    border-color: gtkmix(black, $selected_bg_color, 6%);
+  }
+  @else if $t==osd-insensitive {
+    color: $osd_disabled_fg_color;
+    background-color: gtkalpha($osd_entry_bg, 0.8);
+  }
+}
+
+// Buttons — Skeuomorphic gradient style
+@mixin button($t, $actionb_bg: red, $actionb_fg: green) {
+  @if $t==normal {
+    color: $base07;
+    background-image: skeu-gradient();
+    border: 1px solid black;
+    box-shadow: none;
+  }
+  @else if $t==hover {
+    color: $base07;
+    background-image: skeu-gradient-hover();
+    border: 1px solid white;
+  }
+  @else if $t==active {
+    color: $base07;
+    background-image: skeu-gradient-active();
+  }
+  @else if $t==checked {
+    color: $selected_fg_color;
+    background-color: $selected_bg_color;
+  }
+  @else if $t==insensitive {
+    color: $disabled_fg_color;
+    background-image: _solid($skeu_end);
+    border: 1px solid black;
+    box-shadow: none;
+  }
+  @else if $t==insensitive-checked {
+    color: gtkalpha($selected_fg_color, 0.35);
+    background-color: gtkalpha($selected_bg_color, 0.25);
+  }
+  @if $t==flat-normal {
+    color: $alt_fg_color;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  @else if $t==flat-hover {
+    color: $fg_color;
+    background-color: $button_hover_bg;
+  }
+  @else if $t==flat-active {
+    color: $fg_color;
+    background-color: $button_active_bg;
+  }
+  @else if $t==flat-checked {
+    color: $fg_color;
+    background-color: $button_checked_bg;
+  }
+  @else if $t==flat-insensitive {
+    color: $disabled_fg_color;
+    background-color: transparent;
+  }
+  @else if $t==flat-insensitive-checked {
+    color: $disabled_fg_color;
+    background-color: $button_hover_bg;
+  }
+  @if $t==header-normal {
+    color: $header_fg;
+    background-color: transparent;
+    background-image: $header_button_image;
+    box-shadow: $button_shadow;
+    border: none;
+  }
+  @else if $t==header-hover {
+    color: $header_fg;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(white, 0.05), rgba(white, 0.03));
+    box-shadow: $button_hover_shadow;
+  }
+  @else if $t==header-active {
+    color: $header_fg;
+    background-color: gtkalpha($header_fg, 0.25);
+    background-image: none;
+    box-shadow: none;
+  }
+  @else if $t==header-checked {
+    color: $header_fg;
+    background-color: gtkalpha($header_fg, 0.12);
+    background-image: none;
+    box-shadow: none;
+  }
+  @else if $t==header-insensitive {
+    color: gtkalpha($header_fg, 0.35);
+    background-image: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  @else if $t==header-insensitive-checked {
+    color: gtkalpha($header_fg, 0.35);
+    background-image: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  @if $t==header-backdrop {
+    color: gtkalpha($header_fg, 0.35);
+    background-image: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  @else if $t==header-backdrop-checked {
+    color: gtkalpha($header_fg, 0.35);
+    background-image: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  @else if $t==osd {
+    color: $osd_fg_color;
+    border: none;
+    background-color: $osd_button_bg;
+    box-shadow: none;
+  }
+  @else if $t==osd-hover {
+    color: $osd_fg_color;
+    border: none;
+    background-color: lighten($osd_button_bg, 12%);
+    box-shadow: none;
+  }
+  @else if $t==osd-active {
+    color: $osd_fg_color;
+    border: none;
+    background-color: $osd_button_bg;
+    box-shadow: none;
+  }
+  @else if $t==osd-insensitive {
+    color: $osd_disabled_fg_color;
+    border: none;
+    background-color: $osd_disabled_bg_color;
+    box-shadow: none;
+  }
+  @else if $t==suggested-destructive {
+    color: $selected_fg_color;
+    background-color: $actionb_bg;
+    box-shadow: none;
+    border: none;
+  }
+  @else if $t==suggested-destructive-hover {
+    color: $selected_fg_color;
+    background-color: lighten($actionb_bg, 5%);
+  }
+  @else if $t==suggested-destructive-active {
+    color: $selected_fg_color;
+    background-color: darken($actionb_bg, 10%);
+  }
+}
+
+@mixin overshoot($p) {
+//
+// overshoot
+//
+// $p: position
+//
+// possible $p values:
+// top, bottom, right, left
+//
+
+  $_small_gradient_length: 3%;
+  $_big_gradient_length: 50%;
+
+  $_small_gradient_size: 100% $_small_gradient_length;
+  $_big_gradient_size: 100% $_big_gradient_length;
+
+  @if $p==right or $p==left {
+    $_small_gradient_size: $_small_gradient_length 100%;
+    $_big_gradient_size: $_big_gradient_length 100%;
+  }
+
+  $_small_gradient: radial-gradient(farthest-side at $p,
+                                    gtkalpha(currentColor, 0.12) 85%,
+                                    gtkalpha(currentColor, 0));
+
+  $_big_gradient: radial-gradient(farthest-side at $p,
+                                  gtkalpha(currentColor, 0.05),
+                                  gtkalpha(currentColor, 0));
+
+  background-image: $_small_gradient, $_big_gradient;
+  background-size: $_small_gradient_size, $_big_gradient_size;
+
+  background-repeat: no-repeat;
+  background-position: $p;
+
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+@mixin undershoot($p, $c: $wm_shadow, $neighbor: false, $style: default) {
+//
+// undershoot
+//
+// $p: position
+// $c: shade color
+// $neighbor: use ~ instead of >
+//
+// possible $p values:
+// top, bottom, right, left
+//
+
+  $_border_pos: '';
+  $_direction: '';
+  $_selector: if($neighbor, '~', '>');
+
+  @if $p==top {
+    $_direction: bottom;
+    $_border_pos: 0 1px;
+  } @else if $p==bottom {
+    $_direction: top;
+    $_border_pos: 0 -1px;
+  } @else if $p==left {
+    $_direction: right;
+    $_border_pos: 1px 0;
+  } @else if $p==right {
+    $_direction: left;
+    $_border_pos: -1px 0;
+  } @else {
+    @error "Unknown position #{$p}"
+  }
+
+  #{$_selector} undershoot.#{$p} {
+    box-shadow: if($style == 'default', none, inset $_border_pos $borders_color);
+    background: linear-gradient(to $_direction, gtkalpha($c, .25), transparent 6px);
+  }
+}
+
+@mixin background-shadow($direction, $color) {
+  background-image:
+  linear-gradient($direction,
+                  gtkalpha($color, 0.7),
+                  gtkalpha($color, 0.14) 40px,
+                  gtkalpha($color, 0) 56px),
+  linear-gradient($direction,
+                  gtkalpha($color, 0.4),
+                  gtkalpha($color, 0.14) 7px,
+                  gtkalpha($color, 0) 24px);
+}
+
+@mixin transition-shadows($color) {
+  > dimming {
+    background: none;
+  }
+  
+  > border {
+    background: none;
+  }
+  
+  > shadow {
+    min-width: 56px;
+    min-height: 56px;
+  
+    &.left  { @include background-shadow(to right,  $color); }
+    &.right { @include background-shadow(to left,   $color); }
+    &.up    { @include background-shadow(to bottom, $color); }
+    &.down  { @include background-shadow(to top,    $color); }
+  }
+}

@@ -1,0 +1,33 @@
+//
+// Sanatana Linux Color Palette
+// Author: Thomas Leon Highbaugh
+//
+
+// Base palette
+$base00: #0c0c0c; // Default Background
+$base01: #1c1c1c; // Lighter Background
+$base02: #2c2c2c; // Selection Background
+$base03: #59575f; // Comments, Invisible
+$base04: #8b888f; // Light Foreground
+$base05: #bab6c0; // Default Foreground
+$base06: #d9d5df; // Light Accent Foreground
+$base07: #f7f1ff; // Bright Accent Foreground
+$base08: #fc618d; // Red
+$base09: #ff9e64; // Orange
+$base0A: #fce566; // Yellow
+$base0B: #7dca99; // Green
+$base0C: #59bbe5; // Cyan
+$base0D: #6b9ce8; // Blue
+$base0E: #948ae3; // Magenta
+$base0F: #555566; // Alt Grey Tone
+
+// Theme accent colors
+$theme_color_default: $base0F;
+$theme_color_blue:    $base0F;
+$theme_color_purple:  $base0E;
+$theme_color_pink:    $base08;
+$theme_color_red:     $base08;
+$theme_color_orange:  $base09;
+$theme_color_yellow:  $base0A;
+$theme_color_green:   $base0B;
+$theme_color_grey:    $base03;

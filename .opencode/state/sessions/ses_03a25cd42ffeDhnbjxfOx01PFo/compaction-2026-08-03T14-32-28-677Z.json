@@ -1,0 +1,41 @@
+{
+  "sessionId": "ses_03a25cd42ffeDhnbjxfOx01PFo",
+  "compactedAt": "2026-08-03T14:32:28.677Z",
+  "toolCalls": 51,
+  "durationSeconds": 35961,
+  "subagentInvocations": 0,
+  "modeState": {
+    "ralph": null,
+    "ultrawork": null
+  },
+  "todoProgress": {
+    "lastChange": "",
+    "completed": 0,
+    "remaining": 0,
+    "pending": 0,
+    "inProgress": 0
+  },
+  "recentTools": [
+    {
+      "name": "bash",
+      "time": "2026-08-03T14:20:23.556Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T14:19:16.690Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T14:17:56.192Z"
+    },
+    {
+      "name": "bash",
+      "time": "2026-08-03T14:06:45.746Z"
+    },
+    {
+      "name": "write",
+      "time": "2026-08-03T14:02:33.540Z"
+    }
+  ],
+  "preservedContext": []
+}
