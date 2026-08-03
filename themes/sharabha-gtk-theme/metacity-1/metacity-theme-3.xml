@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<!--
+  sharabha-gtk-theme — Metacity 3 window decorations
+  Author: Thomas Leon Highbaugh
+  Palette: Sanatana Linux
+    bg       #1c1c1c  (frame)
+    bg-light #2c2c2c  (headerbar surface)
+    fg       #f7f1ff  (title text)
+    fg-muted #bab6c0  (backdrop title)
+    accent   #555566  (focused border / buttons)
+    accent-l #66667b  (focused button hover)
+    red      #fc618d  (close)
+    yellow   #fce566 (minimize)
+    green    #7dca99 (maximize)
+-->
+<metacity_theme>
+  <info>
+    <name>sharabha-gtk-theme</name>
+    <author>Thomas Leon Highbaugh</author>
+    <copyright>GPL v3</copyright>
+    <date>2024</date>
+    <description>Skeuomorphic dark GTK theme based on the Sanatana Linux color palette.</description>
+  </info>
+
+  <!-- =========================================================
+       Constants
+       ========================================================= -->
+  <constant name="TitleHeight" value="28"/>
+  <constant name="ButtonSize" value="14"/>
+  <constant name="ButtonPadding" value="6"/>
+  <constant name="CornerRadius" value="6"/>
+
+  <!-- =========================================================
+       Frame geometries
+       ========================================================= -->
+
+  <!-- Normal tiled window — no rounded corners -->
+  <frame_geometry name="normal" rounded_top_left="false" rounded_top_right="false">
+    <distance name="left_width" value="1"/>
+    <distance name="right_width" value="1"/>
+    <distance name="bottom_height" value="1"/>
+    <distance name="left_titlebar_edge" value="0"/>
+    <distance name="right_titlebar_edge" value="0"/>
+    <distance name="button_width" value="14"/>
+    <distance name="button_height" value="14"/>
+    <distance name="title_vertical_pad" value="4"/>
+    <border name="title_border" left="6" right="6" top="4" bottom="3"/>
+    <border name="button_border" left="0" right="6" top="6" bottom="6"/>
+    <aspect_ratio name="button" value="1.0"/>
+  </frame_geometry>
+
+  <!-- Maximized / fullscreen — zero extents, square -->
+  <frame_geometry name="max" rounded_top_left="false" rounded_top_right="false" parent="normal">
+    <distance name="left_width" value="0"/>
+    <distance name="right_width" value="0"/>
+    <distance name="bottom_height" value="0"/>
+  </frame_geometry>
+
+  <!-- Rounded corners for unfocused-floating dialogs -->
+  <frame_geometry name="round" rounded_top_left="true" rounded_top_right="true" parent="normal">
+    <distance name="left_width" value="6"/>
+    <distance name="right_width" value="6"/>
+    <distance name="bottom_height" value="6"/>
+  </frame_geometry>
+
+  <!-- Small-tool variant for utility windows -->
+  <frame_geometry name="utility" rounded_top_left="true" rounded_top_right="true" parent="normal">
+    <distance name="left_width" value="2"/>
+    <distance name="right_width" value="2"/>
+    <distance name="bottom_height" value="2"/>
+    <distance name="title_vertical_pad" value="2"/>
+    <distance name="button_width" value="10"/>
+    <distance name="button_height" value="10"/>
+  </frame_geometry>
+
+  <!-- Border-only frame for undecorated resizable windows -->
+  <frame_geometry name="border" rounded_top_left="false" rounded_top_right="false" parent="normal">
+    <distance name="left_width" value="2"/>
+    <distance name="right_width" value="2"/>
+    <distance name="bottom_height" value="2"/>
+    <distance name="left_titlebar_edge" value="0"/>
+    <distance name="right_titlebar_edge" value="0"/>
+  </frame_geometry>
+
+  <!-- =========================================================
+       Drawing operations
+       ========================================================= -->
+
+  <!-- Title text -->
+  <draw_ops name="title-text-focused">
+    <title color="#f7f1ff" x="(width - title_width) / 2" y="(height - title_height) / 2"/>
+  </draw_ops>
+  <draw_ops name="title-text-unfocused">
+    <title color="#bab6c0" x="(width - title_width) / 2" y="(height - title_height) / 2"/>
+  </draw_ops>
+
+  <!-- Titlebar background gradient -->
+  <draw_ops name="titlebar-focused">
+    <!-- vertical gradient from base01 to base02 -->
+    <gradient type="vertical" x="0" y="0" width="width" height="height">
+      <color value="#1c1c1c"/>
+      <color value="#2c2c2c"/>
+    </gradient>
+    <!-- subtle bottom border line for separation from content -->
+    <line color="#0c0c0c" x1="0" y1="height - 1" x2="width" y2="height - 1"/>
+    <!-- top highlight -->
+    <line color="#3c3c3c" x1="0" y1="0" x2="width" y2="0"/>
+  </draw_ops>
+
+  <draw_ops name="titlebar-unfocused">
+    <gradient type="vertical" x="0" y="0" width="width" height="height">
+      <color value="#0c0c0c"/>
+      <color value="#1c1c1c"/>
+    </gradient>
+    <line color="#1c1c1c" x1="0" y1="height - 1" x2="width" y2="height - 1"/>
+  </draw_ops>
+
+  <!-- Edge lines -->
+  <draw_ops name="edge-focused">
+    <line color="#555566" x1="0" y1="0" x2="width" y2="0"/>
+    <line color="#555566" x1="0" y1="height - 1" x2="width" y2="height - 1"/>
+    <line color="#555566" x1="0" y1="0" x2="0" y2="height"/>
+    <line color="#555566" x1="width - 1" y1="0" x2="width - 1" y2="height"/>
+  </draw_ops>
+  <draw_ops name="edge-unfocused">
+    <line color="#0c0c0c" x1="0" y1="0" x2="width" y2="0"/>
+    <line color="#0c0c0c" x1="0" y1="height - 1" x2="width" y2="height - 1"/>
+    <line color="#0c0c0c" x1="0" y1="0" x2="0" y2="height"/>
+    <line color="#0c0c0c" x1="width - 1" y1="0" x2="width - 1" y2="height"/>
+  </draw_ops>
+
+  <!-- Button icons -->
+
+  <!-- Close (red) -->
+  <draw_ops name="close-icon-focused">
+    <line color="#f7f1ff" width="2" x1="3" y1="3" x2="width - 3" y2="height - 3"/>
+    <line color="#f7f1ff" width="2" x1="width - 3" y1="3" x2="3" y2="height - 3"/>
+  </draw_ops>
+  <draw_ops name="close-icon-unfocused">
+    <line color="#59575f" width="2" x1="3" y1="3" x2="width - 3" y2="height - 3"/>
+    <line color="#59575f" width="2" x1="width - 3" y1="3" x2="3" y2="height - 3"/>
+  </draw_ops>
+  <draw_ops name="close-focused">
+    <line color="#fc618d" width="2" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#fc618d" width="2" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#fc618d" width="2" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#fc618d" width="2" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+    <gradient type="vertical" x="2" y="2" width="width - 4" height="height - 4">
+      <color value="#fc618d"/>
+      <color value="#c44e72"/>
+    </gradient>
+    <include name="close-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="close-prelight">
+    <include name="close-focused"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+  </draw_ops>
+  <draw_ops name="close-pressed">
+    <include name="close-focused"/>
+  </draw_ops>
+  <draw_ops name="close-unfocused">
+    <gradient type="vertical" x="0" y="0" width="width" height="height">
+      <color value="#1c1c1c"/>
+      <color value="#0c0c0c"/>
+    </gradient>
+    <include name="close-icon-unfocused"/>
+  </draw_ops>
+
+  <!-- Maximize (green) -->
+  <draw_ops name="maximize-icon-focused">
+    <rectangle color="#f7f1ff" filled="false" x="2" y="2" width="width - 5" height="height - 5"/>
+    <line color="#f7f1ff" width="2" x1="2" y1="2" x2="width - 3" y2="2"/>
+  </draw_ops>
+  <draw_ops name="maximize-icon-unfocused">
+    <rectangle color="#59575f" filled="false" x="2" y="2" width="width - 5" height="height - 5"/>
+    <line color="#59575f" width="2" x1="2" y1="2" x2="width - 3" y2="2"/>
+  </draw_ops>
+  <draw_ops name="maximize-focused">
+    <line color="#7dca99" width="2" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#7dca99" width="2" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#7dca99" width="2" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#7dca99" width="2" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+    <gradient type="vertical" x="2" y="2" width="width - 4" height="height - 4">
+      <color value="#7dca99"/>
+      <color value="#5da877"/>
+    </gradient>
+    <include name="maximize-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="maximize-prelight">
+    <include name="maximize-focused"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+  </draw_ops>
+  <draw_ops name="maximize-pressed">
+    <include name="maximize-focused"/>
+  </draw_ops>
+  <draw_ops name="maximize-unfocused">
+    <gradient type="vertical" x="0" y="0" width="width" height="height">
+      <color value="#1c1c1c"/>
+      <color value="#0c0c0c"/>
+    </gradient>
+    <include name="maximize-icon-unfocused"/>
+  </draw_ops>
+
+  <!-- Minimize (yellow) -->
+  <draw_ops name="minimize-icon-focused">
+    <line color="#f7f1ff" width="2" x1="2" y1="height - 3" x2="width - 3" y2="height - 3"/>
+  </draw_ops>
+  <draw_ops name="minimize-icon-unfocused">
+    <line color="#59575f" width="2" x1="2" y1="height - 3" x2="width - 3" y2="height - 3"/>
+  </draw_ops>
+  <draw_ops name="minimize-focused">
+    <line color="#fce566" width="2" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#fce566" width="2" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#fce566" width="2" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#fce566" width="2" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+    <gradient type="vertical" x="2" y="2" width="width - 4" height="height - 4">
+      <color value="#fce566"/>
+      <color value="#cdb247"/>
+    </gradient>
+    <include name="minimize-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="minimize-prelight">
+    <include name="minimize-focused"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="width - 1" y2="0"/>
+    <line color="#66667b" width="1" x1="0" y1="0" x2="0" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+    <line color="#66667b" width="1" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+  </draw_ops>
+  <draw_ops name="minimize-pressed">
+    <include name="minimize-focused"/>
+  </draw_ops>
+  <draw_ops name="minimize-unfocused">
+    <gradient type="vertical" x="0" y="0" width="width" height="height">
+      <color value="#1c1c1c"/>
+      <color value="#0c0c0c"/>
+    </gradient>
+    <include name="minimize-icon-unfocused"/>
+  </draw_ops>
+
+  <!-- Menu (small square dot) -->
+  <draw_ops name="menu-icon-focused">
+    <rectangle color="#f7f1ff" filled="true" x="(width - 8) / 2" y="(height - 8) / 2" width="8" height="8"/>
+  </draw_ops>
+  <draw_ops name="menu-icon-unfocused">
+    <rectangle color="#59575f" filled="true" x="(width - 8) / 2" y="(height - 8) / 2" width="8" height="8"/>
+  </draw_ops>
+  <draw_ops name="menu-focused">
+    <include name="menu-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="menu-prelight">
+    <rectangle color="#2c2c2c" filled="true" x="0" y="0" width="width" height="height"/>
+    <include name="menu-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="menu-pressed">
+    <rectangle color="#1c1c1c" filled="true" x="0" y="0" width="width" height="height"/>
+    <include name="menu-icon-focused"/>
+  </draw_ops>
+  <draw_ops name="menu-unfocused">
+    <include name="menu-icon-unfocused"/>
+  </draw_ops>
+
+  <!-- =========================================================
+       Frame styles
+       ========================================================= -->
+
+  <frame_style name="normal-focused" geometry="normal">
+    <piece position="entire_background" draw_ops="titlebar-focused"/>
+    <piece position="title" draw_ops="title-text-focused"/>
+    <piece position="overlay" draw_ops="edge-focused"/>
+    <button function="close" state="normal"   draw_ops="close-focused"/>
+    <button function="close" state="prelight" draw_ops="close-prelight"/>
+    <button function="close" state="pressed"  draw_ops="close-pressed"/>
+    <button function="maximize" state="normal"   draw_ops="maximize-focused"/>
+    <button function="maximize" state="prelight" draw_ops="maximize-prelight"/>
+    <button function="maximize" state="pressed"  draw_ops="maximize-pressed"/>
+    <button function="minimize" state="normal"   draw_ops="minimize-focused"/>
+    <button function="minimize" state="prelight" draw_ops="minimize-prelight"/>
+    <button function="minimize" state="pressed"  draw_ops="minimize-pressed"/>
+    <button function="menu" state="normal"   draw_ops="menu-focused"/>
+    <button function="menu" state="prelight" draw_ops="menu-prelight"/>
+    <button function="menu" state="pressed"  draw_ops="menu-pressed"/>
+    <shadow color="#0c0c0c" filled="false" x="0" y="6" width="0" height="0"/>
+    <padding name="left" left="6" right="0" top="0" bottom="0"/>
+  </frame_style>
+
+  <frame_style name="normal-unfocused" geometry="normal" parent="normal-focused">
+    <piece position="entire_background" draw_ops="titlebar-unfocused"/>
+    <piece position="title" draw_ops="title-text-unfocused"/>
+    <piece position="overlay" draw_ops="edge-unfocused"/>
+    <button function="close" state="normal"   draw_ops="close-unfocused"/>
+    <button function="close" state="prelight" draw_ops="close-prelight"/>
+    <button function="close" state="pressed"  draw_ops="close-pressed"/>
+    <button function="maximize" state="normal"   draw_ops="maximize-unfocused"/>
+    <button function="maximize" state="prelight" draw_ops="maximize-prelight"/>
+    <button function="maximize" state="pressed"  draw_ops="maximize-pressed"/>
+    <button function="minimize" state="normal"   draw_ops="minimize-unfocused"/>
+    <button function="minimize" state="prelight" draw_ops="minimize-prelight"/>
+    <button function="minimize" state="pressed"  draw_ops="minimize-pressed"/>
+    <button function="menu" state="normal"   draw_ops="menu-unfocused"/>
+    <button function="menu" state="prelight" draw_ops="menu-prelight"/>
+    <button function="menu" state="pressed"  draw_ops="menu-pressed"/>
+    <shadow color="#0c0c0c" filled="false" x="0" y="3" width="0" height="0"/>
+  </frame_style>
+
+  <frame_style name="max-focused" geometry="max" parent="normal-focused">
+    <piece position="entire_background" draw_ops="titlebar-focused"/>
+    <piece position="title" draw_ops="title-text-focused"/>
+    <piece position="overlay" draw_ops="edge-focused"/>
+  </frame_style>
+
+  <frame_style name="max-unfocused" geometry="max" parent="normal-unfocused">
+    <piece position="entire_background" draw_ops="titlebar-unfocused"/>
+    <piece position="title" draw_ops="title-text-unfocused"/>
+    <piece position="overlay" draw_ops="edge-unfocused"/>
+  </frame_style>
+
+  <frame_style name="round-focused" geometry="round" parent="normal-focused"/>
+  <frame_style name="round-unfocused" geometry="round" parent="normal-unfocused"/>
+
+  <frame_style name="utility-focused" geometry="utility" parent="normal-focused"/>
+  <frame_style name="utility-unfocused" geometry="utility" parent="normal-unfocused"/>
+
+  <frame_style name="border-focused" geometry="border">
+    <piece position="entire_background" draw_ops="titlebar-focused"/>
+    <piece position="overlay" draw_ops="edge-focused"/>
+  </frame_style>
+  <frame_style name="border-unfocused" geometry="border" parent="border-focused">
+    <piece position="entire_background" draw_ops="titlebar-unfocused"/>
+    <piece position="overlay" draw_ops="edge-unfocused"/>
+  </frame_style>
+
+  <!-- =========================================================
+       Frame style sets
+       ========================================================= -->
+  <frame_style_set name="normal">
+    <frame focus="yes" state="normal"    resize="both" style="normal-focused"/>
+    <frame focus="no"  state="normal"    resize="both" style="normal-unfocused"/>
+    <frame focus="yes" state="maximized" style="max-focused"/>
+    <frame focus="no"  state="maximized" style="max-unfocused"/>
+    <frame focus="yes" state="shaded"    style="normal-focused"/>
+    <frame focus="no"  state="shaded"    style="normal-unfocused"/>
+    <frame focus="yes" state="maximized_and_shaded" style="max-focused"/>
+    <frame focus="no"  state="maximized_and_shaded" style="max-unfocused"/>
+  </frame_style_set>
+
+  <frame_style_set name="utility" parent="normal">
+    <frame focus="yes" state="normal"    resize="both" style="utility-focused"/>
+    <frame focus="no"  state="normal"    resize="both" style="utility-unfocused"/>
+    <frame focus="yes" state="maximized" style="utility-focused"/>
+    <frame focus="no"  state="maximized" style="utility-unfocused"/>
+  </frame_style_set>
+
+  <frame_style_set name="border">
+    <frame focus="yes" state="normal" resize="both" style="border-focused"/>
+    <frame focus="no"  state="normal" resize="both" style="border-unfocused"/>
+  </frame_style_set>
+
+  <frame_style_set name="rounded">
+    <frame focus="yes" state="normal"    resize="both" style="round-focused"/>
+    <frame focus="no"  state="normal"    resize="both" style="round-unfocused"/>
+    <frame focus="yes" state="maximized" style="max-focused"/>
+    <frame focus="no"  state="maximized" style="max-unfocused"/>
+  </frame_style_set>
+
+  <!-- =========================================================
+       Windows
+       ========================================================= -->
+  <window type="normal"        style_set="normal"/>
+  <window type="dialog"        style_set="rounded"/>
+  <window type="modal_dialog" style_set="rounded"/>
+  <window type="menu"         style_set="utility"/>
+  <window type="utility"      style_set="utility"/>
+  <window type="border"       style_set="border"/>
+
+</metacity_theme>

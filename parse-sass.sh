@@ -33,6 +33,7 @@ if [ ! -z "${COLOR_VARIANTS:-}" ]; then
 	IFS=', ' read -r -a _COLOR_VARIANTS <<<"${COLOR_VARIANTS:-}"
 fi
 
+# Compile the SCSS-driven variants (gtk-3.0, gtk-4.0, gnome-shell, cinnamon)
 for color in "${_COLOR_VARIANTS[@]}"; do
 	sassc $SASSC_OPT src/main/gtk-3.0/gtk${color}.{scss,css}
 	echo "==> Generating the 3.0 gtk${color}.css..."
@@ -43,3 +44,7 @@ for color in "${_COLOR_VARIANTS[@]}"; do
 	sassc $SASSC_OPT src/main/cinnamon/cinnamon${color}.{scss,css}
 	echo "==> Generating the cinnamon${color}.css..."
 done
+
+echo "==> gtk-2.0 gtkrc is static (no compilation needed)"
+echo "==> metacity-1/metacity-theme-3.xml is static (no compilation needed)"
+echo "==> xfwm4/themerc + SVG assets are static (no compilation needed)"

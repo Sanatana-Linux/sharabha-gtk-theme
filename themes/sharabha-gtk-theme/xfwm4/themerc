@@ -1,0 +1,43 @@
+# sharabha-gtk-theme — XFWM4 window decorations
+# Author: Thomas Leon Highbaugh
+# Palette: Sanatana Linux
+#   bg       #1c1c1c
+#   bg-light #2c2c2c
+#   fg       #f7f1ff
+#   fg-muted #bab6c0
+#   accent   #555566
+
+# Defaults ---------------------------------------------------------------
+active_text_alpha=255
+inactive_text_alpha=180
+title_shadow_active=true
+title_shadow_inactive=false
+title_horizontal_offset=4
+title_vertical_offset_active=3
+title_vertical_offset_inactive=4
+shadow_delta_height=6
+shadow_delta_width=0
+shadow_delta_x=0
+shadow_delta_y=6
+shadow_opacity=60
+
+# Use SVG assets (xfwm 4.12+ with rsvg support)
+button_offset=4
+button_spacing=4
+button_margin_top=4
+button_margin_left=0
+button_margin_right=0
+button_margin_bottom=0
+
+# Window dimensions & colors
+full_width_title=true
+title_extended_active=true
+
+# Color tokens (overridable per themerc)
+active_color=#1c1c1c
+inactive_color=#0c0c0c
+active_text_color=#f7f1ff
+inactive_text_color=#bab6c0
+active_border_color=#555566
+inactive_border_color=#1c1c1c
+active_title_shadow=#0c0c0c

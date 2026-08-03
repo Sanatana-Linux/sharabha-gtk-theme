@@ -1,0 +1,330 @@
+#
+# sharabha-gtk-theme — GTK2 theme
+# based on the Sanatana Linux color palette
+# Author: Thomas Leon Highbaugh
+#
+# This file provides legacy GTK2 application styling on XFCE, MATE, and
+# other desktops that still load GTK2 widgets. Pure-engine styling with
+# no PNG assets — colors mirror the GTK3/4 SCSS palette.
+#
+
+gtk_color_name = "sharabha-gtk-theme"
+gtk_theme_name  = "sharabha-gtk-theme"
+
+# ---------------------------------------------------------------------------
+# Sanatana Linux palette
+# ---------------------------------------------------------------------------
+gtk_color_scheme = "
+bg_color:#1c1c1c
+fg_color:#bab6c0
+text_color:#f7f1ff
+base_color:#2c2c2c
+selected_bg_color:#555566
+selected_fg_color:#f7f1ff
+tooltip_bg_color:#0c0c0c
+tooltip_fg_color:#d9d5df
+"
+# ---------------------------------------------------------------------------
+gtk-auto-mnemonics              = 1
+gtk-icon-sizes                  = "panel-menu=16,16:gtk-button=16,16"
+gtk-toolbar-icon-sizes          = "16,16"
+# ---------------------------------------------------------------------------
+# Default style
+# ---------------------------------------------------------------------------
+style "default" {
+  xthickness   = 6
+  ythickness   = 6
+
+  bg[NORMAL]      = "#1c1c1c"
+  bg[PRELIGHT]    = "#2c2c2c"
+  bg[SELECTED]    = "#555566"
+  bg[ACTIVE]      = "#2c2c2c"
+  bg[INSENSITIVE] = "#0c0c0c"
+
+  fg[NORMAL]      = "#bab6c0"
+  fg[PRELIGHT]    = "#f7f1ff"
+  fg[SELECTED]    = "#f7f1ff"
+  fg[ACTIVE]      = "#bab6c0"
+  fg[INSENSITIVE] = "#59575f"
+
+  text[NORMAL]      = "#f7f1ff"
+  text[PRELIGHT]    = "#f7f1ff"
+  text[SELECTED]    = "#f7f1ff"
+  text[ACTIVE]      = "#f7f1ff"
+  text[INSENSITIVE] = "#59575f"
+
+  base[NORMAL]      = "#2c2c2c"
+  base[PRELIGHT]    = "#2c2c2c"
+  base[SELECTED]    = "#555566"
+  base[ACTIVE]      = "#2c2c2c"
+  base[INSENSITIVE] = "#0c0c0c"
+
+  # Tooltip colors
+  engine "murrine" {
+    menuitemstyle             = 0
+    animation                 = FALSE
+    colorize_scrollbar        = FALSE
+    scrollbar_style           = 0
+    contrast                  = 0.4
+    glazestyle                = 0
+    glowstyle                 = 0
+    highlight_shade            = 1.0
+    lightborder_shade         = 1.0
+    listviewitemstyle         = 0
+    menustyle                 = 0
+    menubaritemstyle          = 0
+    menubarstyle              = 0
+    reliefstyle               = 0
+    roundness                 = 6
+    slider_style              = 0
+    stepperstyle              = 0
+    toolbarstyle              = 0
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Toplevel windows
+# ---------------------------------------------------------------------------
+style "toplevel" {
+  bg[NORMAL]   = "#1c1c1c"
+  fg[NORMAL]   = "#bab6c0"
+}
+
+# ---------------------------------------------------------------------------
+# Buttons — skeu-friendly flat fallback
+# ---------------------------------------------------------------------------
+style "button" {
+  xthickness   = 8
+  ythickness   = 4
+
+  bg[NORMAL]      = "#2c2c2c"
+  bg[PRELIGHT]    = "#3c3c3c"
+  bg[ACTIVE]      = "#1c1c1c"
+  bg[INSENSITIVE] = "#0c0c0c"
+
+  fg[NORMAL]      = "#f7f1ff"
+  fg[PRELIGHT]    = "#f7f1ff"
+  fg[ACTIVE]      = "#bab6c0"
+  fg[INSENSITIVE] = "#59575f"
+
+  engine "murrine" {
+    roundness          = 6
+    contrast           = 0.6
+    reliefstyle        = 1
+    border_shades      = { 1.0, 0.85 }
+    gradient_shades    = { 1.0, 0.95 }
+    text_shade         = 1.0
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Entry / input
+# ---------------------------------------------------------------------------
+style "entry" {
+  xthickness   = 6
+  ythickness   = 4
+
+  bg[NORMAL]      = "#0c0c0c"
+  bg[SELECTED]    = "#555566"
+  base[NORMAL]    = "#0c0c0c"
+  base[SELECTED]  = "#555566"
+  base[ACTIVE]    = "#0c0c0c"
+  base[INSENSITIVE] = "#1c1c1c"
+
+  text[NORMAL]    = "#f7f1ff"
+  text[SELECTED]  = "#f7f1ff"
+  text[ACTIVE]    = "#f7f1ff"
+
+  engine "murrine" {
+    roundness      = 4
+    glowstyle      = 1
+    glow_shade     = 1.1
+    border_shades  = { 1.05, 0.85 }
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Menu
+# ---------------------------------------------------------------------------
+style "menu" {
+  xthickness   = 4
+  ythickness   = 4
+
+  bg[NORMAL]    = "#1c1c1c"
+  bg[PRELIGHT]  = "#2c2c2c"
+  bg[SELECTED]  = "#555566"
+  fg[NORMAL]    = "#bab6c0"
+  fg[PRELIGHT]  = "#f7f1ff"
+  fg[SELECTED]  = "#f7f1ff"
+
+  engine "murrine" {
+    roundness      = 4
+    reliefstyle    = 0
+    menustyle      = 0
+  }
+}
+
+style "menu-item" = "menu" {
+  xthickness   = 8
+  ythickness   = 4
+  bg[PRELIGHT]  = "#2c2c2c"
+  bg[SELECTED]  = "#555566"
+  fg[PRELIGHT]  = "#f7f1ff"
+}
+
+# ---------------------------------------------------------------------------
+# Scrollbar / range
+# ---------------------------------------------------------------------------
+style "range" {
+  bg[NORMAL]    = "#2c2c2c"
+  bg[PRELIGHT]  = "#3c3c3c"
+  bg[ACTIVE]    = "#555566"
+
+  engine "murrine" {
+    roundness              = 9999
+    slider_style           = 0
+    scrollbar_style        = 0
+    stepper_style          = 0
+    colorize_scrollbar     = TRUE
+    gradient_shades        = { 1.0, 0.95 }
+    border_shades          = { 0.95, 0.80 }
+    contrast               = 0.6
+    highlight_shade        = 1.0
+    handlestyle            = 0
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Toolbar / menubar
+# ---------------------------------------------------------------------------
+style "toolbar" {
+  bg[NORMAL]    = "#1c1c1c"
+  fg[NORMAL]    = "#bab6c0"
+}
+style "menubar" = "toolbar" { }
+
+# ---------------------------------------------------------------------------
+# Progress bar / scale
+# ---------------------------------------------------------------------------
+style "progressbar" {
+  bg[NORMAL]      = "#2c2c2c"
+  bg[PRELIGHT]    = "#3c3c3c"
+  bg[SELECTED]    = "#555566"
+
+  fg[PRELIGHT]    = "#f7f1ff"
+
+  engine "murrine" {
+    roundness        = 9999
+    border_shades    = { 1.0, 0.85 }
+    gradient_shades  = { 1.0, 0.90 }
+    glowstyle        = 1
+    glow_shade       = 1.05
+    contrast         = 0.6
+  }
+}
+
+style "scale" = "progressbar" {
+  bg[NORMAL]      = "#555566"
+  bg[PRELIGHT]    = "#66667b"
+}
+
+# ---------------------------------------------------------------------------
+# Notebook / tabs
+# ---------------------------------------------------------------------------
+style "notebook" {
+  bg[NORMAL]      = "#1c1c1c"
+  bg[ACTIVE]      = "#0c0c0c"
+  bg[SELECTED]    = "#555566"
+  fg[NORMAL]      = "#bab6c0"
+  fg[ACTIVE]      = "#59575f"
+  fg[SELECTED]    = "#f7f1ff"
+
+  engine "murrine" {
+    roundness      = 4
+    gradient_shades  = { 1.0, 0.95 }
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Headerbar-like widgets via TreeMenu / GdHeaderBar fallback
+# ---------------------------------------------------------------------------
+style "headerbar" {
+  bg[NORMAL]      = "#0c0c0c"
+  fg[NORMAL]      = "#f7f1ff"
+  text[NORMAL]    = "#f7f1ff"
+  base[NORMAL]    = "#0c0c0c"
+}
+
+# ---------------------------------------------------------------------------
+# Tooltips
+# ---------------------------------------------------------------------------
+style "tooltip" {
+  bg[NORMAL]    = "#0c0c0c"
+  fg[NORMAL]    = "#d9d5df"
+}
+
+# ---------------------------------------------------------------------------
+# Statusbar / handlebox / frames
+# ---------------------------------------------------------------------------
+style "statusbar" {
+  bg[NORMAL]  = "#1c1c1c"
+  fg[NORMAL]  = "#bab6c0"
+}
+style "handlebox" = "statusbar" { }
+
+style "frame" {
+  bg[NORMAL]      = "#1c1c1c"
+  fg[NORMAL]      = "#bab6c0"
+}
+
+# ---------------------------------------------------------------------------
+# Lists and trees
+# ---------------------------------------------------------------------------
+style "list" {
+  bg[NORMAL]    = "#1c1c1c"
+  bg[SELECTED]  = "#555566"
+  bg[PRELIGHT]  = "#2c2c2c"
+  fg[NORMAL]    = "#bab6c0"
+  fg[SELECTED]  = "#f7f1ff"
+  text[NORMAL]  = "#f7f1ff"
+  text[SELECTED]= "#f7f1ff"
+  base[NORMAL]  = "#0c0c0c"
+}
+
+# ---------------------------------------------------------------------------
+# Class mappings
+# ---------------------------------------------------------------------------
+class "*"                    style "default"
+class "GtkWidget"           style "default"
+class "GtkButton"           style "button"
+class "GtkToggleButton"     style "button"
+class "GtkOptionMenu"       style "button"
+class "GtkCheckButton"      style "button"
+class "GtkRadioButton"      style "button"
+class "GtkSpinButton"        style "entry"
+class "GtkEntry"            style "entry"
+class "GtkTextView"          style "entry"
+class "GtkMenu"              style "menu"
+class "GtkMenuItem"         style "menu-item"
+class "GtkMenuBar"          style "menubar"
+class "GtkToolbar"          style "toolbar"
+class "GtkHandleBox"         style "handlebox"
+class "GtkStatusbar"         style "statusbar"
+class "GtkFrame"            style "frame"
+class "GtkNotebook"         style "notebook"
+class "GtkRange"            style "range"
+class "GtkScale"            style "scale"
+class "GtkProgressBar"      style "progressbar"
+class "GtkTreeView"          style "list"
+class "GtkTreeViewColumn"   style "list"
+class "GtkListStore"        style "list"
+class "GtkTreeViewRow"      style "list"
+widget_class "*<GtkMenuItem>*"  style "menu-item"
+widget_class "*<GtkMenu>*.*"   style "menu-item"
+widget_class "*<GtkMenuShell>*" style "menu"
+widget "*ToolTips*"            style "tooltip"
+widget "gtk-tooltip"          style "tooltip"
+widget "*.Panel."            style "headerbar"
+
+#	GtkHeaderBar fallback (older GTK2 builds)
+widget_class "*<GtkHeaderBar>*" style "headerbar"
