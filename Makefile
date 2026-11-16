@@ -1,5 +1,5 @@
-PKGNAME = skeuos-gtk
-MAINTAINER = Daniel Ruiz de Alegría <daniel@drasite.com>
+PKGNAME = sharabha-gtk-theme
+MAINTAINER = Thomas Leon Highbaugh <me@thomasleonhighbaugh.me> 
 PREFIX ?= /usr
 THEMES ?= $(patsubst themes/%/,%,$(wildcard themes/*/))
 
